@@ -5,7 +5,7 @@ function Vehicle(x, y){
     this.target = createVector(x, y);
     this.r = 2
     this.maxSpeed = random(7, 12);
-    this.maxForce = random(0.9, 1.2);
+    this.maxForce = random(0.3, 0.5);
     this.slowRadius = 100;
     this.runRadius = random(70, 90);
 }
@@ -42,7 +42,7 @@ Vehicle.prototype.arrive = function(target){
     let desiredSpeed = this.maxSpeed
     let distance = desiredForce.mag();
     if(distance < this.slowRadius){
-        desiredSpeed = map(distance, 0, this.slowRadius, 0, this.maxSpeed)
+        desiredSpeed = map(distance, 0, this.slowRadius, 1, this.maxSpeed)
     }
 
     desiredForce.setMag(desiredSpeed);

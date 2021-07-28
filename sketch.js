@@ -18,7 +18,7 @@ function setup() {
 	vehicles = []
 	for (let i = 0; i < points.length; i++) {
 		let pt = points[i]
-		let vehicle = new Vehicle(pt.x, pt.y)
+		let vehicle = new Vehicle(pt.x, pt.y, TEXT)
 		vehicles.push(vehicle)
 	}
 
@@ -50,7 +50,7 @@ function myInputEvent() {
 	vehicles = []
 	for (let i = 0; i < points.length; i++) {
 		let pt = points[i]
-		let vehicle = new Vehicle(pt.x, pt.y)
+		let vehicle = new Vehicle(pt.x, pt.y, TEXT)
 		vehicles.push(vehicle)
 	}
 

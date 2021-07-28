@@ -1,4 +1,4 @@
-function Vehicle(x, y){
+function Vehicle(x, y, text){
     this.pos = createVector(random(width), random(height));
     this.vel = p5.Vector.random2D();
     this.acc = createVector();
@@ -8,6 +8,7 @@ function Vehicle(x, y){
     this.maxForce = random(0.3, 0.5);
     this.slowRadius = 100;
     this.runRadius = random(70, 90);
+    this.text = text
 }
 
 Vehicle.prototype.applyBehaviors = function(){
@@ -33,6 +34,9 @@ Vehicle.prototype.update = function(){
 
 Vehicle.prototype.show = function(){
     stroke(255)
+    if(this.text.toLowerCase() == "joe"){
+        stroke(random(255), random(255), random(255))
+    }
     strokeWeight(this.r)
     point(this.pos.x, this.pos.y)
 }

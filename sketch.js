@@ -8,7 +8,8 @@ const TEXTSIZE = 150
 const INPUTSIZE = 300
 
 function setup() {
-	createCanvas(windowWidth - 4, windowHeight - 4);
+	let cnv = createCanvas(windowWidth, windowHeight);
+  	cnv.style('display', 'block');
 	background(51)
 
 	textAlign(CENTER)
@@ -28,7 +29,7 @@ function setup() {
 }
 
 function windowResized() {
-	resizeCanvas(windowWidth - 4, windowHeight - 4);
+	resizeCanvas(windowWidth, windowHeight);
 }
 
 function draw() {

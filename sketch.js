@@ -33,7 +33,7 @@ function windowResized() {
 }
 
 function draw() {
-	background(51);
+	background(0, 0, 10);
 	for (let i = 0; i < vehicles.length; i++) {
 		v = vehicles[i]
 		v.applyBehaviors()

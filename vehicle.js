@@ -34,9 +34,13 @@ Vehicle.prototype.update = function(){
 
 Vehicle.prototype.show = function(){
 	colorMode(HSB)
-
-    stroke(map(this.target.x, width / 2 - textWidth(TEXT) / 2, width / 2 + textWidth(TEXT) / 2, 0, 255), 255, 255)
     
+    stroke(255)
+
+    if(this.text.toLowerCase() == "rainbow" || this.text.toLowerCase() == "reyaansh patil"){
+        stroke(map(this.target.x, width / 2 - textWidth(TEXT) / 2, width / 2 + textWidth(TEXT) / 2, 0, 255), 255, 255)
+    }
+
     strokeWeight(this.r)
     point(this.pos.x, this.pos.y)
 }

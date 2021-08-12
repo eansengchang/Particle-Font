@@ -6,6 +6,7 @@ let TEXT = "Cool Simulation"
 let vehicles = []
 const TEXTSIZE = 150
 const INPUTSIZE = 300
+let input;
 
 function setup() {
 	let cnv = createCanvas(windowWidth, windowHeight);
@@ -26,6 +27,13 @@ function setup() {
   	input.position(width / 2 - INPUTSIZE / 2, height - 100);
 	input.size(INPUTSIZE)
 	input.input(myInputEvent);
+	input.mousePressed(mousePressed)
+}
+
+function mousePressed(){
+	if(input.value() == "Enter Something!"){
+		input.value("")
+	}
 }
 
 function windowResized() {

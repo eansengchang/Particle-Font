@@ -1,65 +1,76 @@
 function preload() {
-	font = loadFont('avenir-next-lt-pro-demi.otf')
+  font = loadFont('avenir-next-lt-pro-demi.otf');
 }
 
-let TEXT = "Cool Simulation"
-let vehicles = []
-const TEXTSIZE = 150
-const INPUTSIZE = 300
-let input;
+// 224
+
+let time = '88:88:88'.split('');
+let prevTime = '88888888'.split('');
+let vehicles = [];
+const TEXTSIZE = 150;
+
+let digits = [];
 
 function setup() {
-	let cnv = createCanvas(windowWidth, windowHeight);
-  	cnv.style('display', 'block');
-	background(51)
+  let cnv = createCanvas(windowWidth, windowHeight);
+  cnv.style('display', 'block');
+  background(155, 155, 255);
 
-	textAlign(CENTER)
-	textSize(TEXTSIZE)
-	let points = font.textToPoints(TEXT, width / 2 - textWidth(TEXT)/2, height / 2, TEXTSIZE, { sampleFactor: 0.4 })
-	vehicles = []
-	for (let i = 0; i < points.length; i++) {
-		let pt = points[i]
-		let vehicle = new Vehicle(pt.x, pt.y, TEXT)
-		vehicles.push(vehicle)
-	}
+  //   textAlign(CENTER);
+  textSize(TEXTSIZE);
 
-	input = createInput("Enter Something!");
-  	input.position(width / 2 - INPUTSIZE / 2, height - 100);
-	input.size(INPUTSIZE)
-	input.input(myInputEvent);
-	input.mousePressed(mousePressed)
-}
+  //   digits.push(new Digit(width / 2 - 300 - textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 - 200 - textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 - 100 - textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 - 50 - textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 + 50 - textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 + 150 - textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 + 200 - textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 + 300 - textWidth('8') / 2, height / 2));
 
-function mousePressed(){
-	if(input.value() == "Enter Something!"){
-		input.value("")
-	}
+  let start = width / 2 - textWidth('88:88:88') / 2;
+  for (let i = 0; i < time.length; i++) {
+    digits.push(new Digit(start, height / 2));
+    start += textWidth(time[i]);
+  }
+
+  //   digits.push(new Digit(width / 2 - 300 + textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 - 300 + 3 * textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 - 300 + 5 * textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 - 300 + 7 * textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 - 300 + 9 * textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 - 300 + 11 * textWidth('8') / 2, height / 2));
+  //   digits.push(new Digit(width / 2 - 300 + 13 * textWidth('8') / 2, height / 2));
 }
 
 function windowResized() {
-	resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
-	background(0, 0, 10);
-	for (let i = 0; i < vehicles.length; i++) {
-		v = vehicles[i]
-		v.applyBehaviors()
-		v.update()
-		v.show()
-	}
-}
+  background(155, 155, 255);
+  for (let i = 0; i < digits.length; i++) {
+    digits[i].showVehicles();
+  }
 
-function myInputEvent() {
-	TEXT = this.value()
-	console.log
+  let hr = hour().toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
+  let min = minute().toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
+  let sc = second().toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
 
-	let points = font.textToPoints(TEXT, width / 2 - textWidth(TEXT)/2, height / 2, TEXTSIZE, { sampleFactor: 0.4 })
-	vehicles = []
-	for (let i = 0; i < points.length; i++) {
-		let pt = points[i]
-		let vehicle = new Vehicle(pt.x, pt.y, TEXT)
-		vehicles.push(vehicle)
-	}
-
+  time = `${hr}:${min}:${sc}`.split('');
+  for (let i = 0; i < time.length; i++) {
+    if (prevTime[i] != time[i]) {
+      digits[i].updateDigit(time[i]);
+      prevTime[i] = time[i];
+    }
+  }
 }
